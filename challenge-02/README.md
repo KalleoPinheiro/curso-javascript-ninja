@@ -22,16 +22,16 @@ Crie uma função que adicione um valor à variável criada acima, e retorne a s
     O valor da variável agora é VALOR.
 Onde VALOR é o novo valor da variável.
 */
- function addValueOnVariable(value){                 
-  noValue = value;                                  
-  return ('O valor da variável agora é ' + noValue);
+ function addValueOnVariable(){                 
+  noValue = 10;                                  
+  return 'O valor da variável agora é ' + noValue;
 }                                                 
 
 // Invoque a função criada acima.
-addValueOnVariable(10);
+addValueOnVariable();
 
 // Qual o retorno da função? (Use comentários de bloco).
-'O valor da variável agora é 10'
+/* 'O valor da variável agora é 10' */
 
 /*
 Crie uma função com as seguintes características:
@@ -52,13 +52,13 @@ if(!arg1 || !arg2 || !arg3){
 verifyValues(1, 2);
 
 // Qual o resultado da invocação acima? (Use comentários para mostrar o valor retornado).
-'Preencha todos os valores corretamente!'
+// 'Preencha todos os valores corretamente!'
 
 // Agora invoque novamente a função criada acima, mas passando todos os três argumentos necessários.
 verifyValues(1, 2, 3);
 
 // Qual o resultado da invocação acima? (Use comentários para mostrar o valor retornado).
-8
+// 8
 
 /*
 Crie uma função com as seguintes características:
