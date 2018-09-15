@@ -32,7 +32,7 @@ Mostre no console o segundo elemento desse último array, criado acima, com a
 frase:
 "O segundo elemento do segundo array é [ELEMENTO]."
 */
-console.log('O segundo elemento do segundo array é: ' + array[5][2].item);
+console.log('O segundo elemento do segundo array é: ' + array[5][1]);
 
 /*
 Mostre no console quantos itens tem o primeiro array criado, com a frase:
@@ -65,14 +65,14 @@ console.log('Números pares entre 10 e 20: ' + pares);
 Na mesma ideia do exercício acima: mostre agora os números ímpares.
 */
 var num = 10;
-var pares = [];
+var impares = [];
 while (num <= 20) {
-  if (num % 2 === 1) {
-    pares.push(num);
+  if (num % 2 !== 0) {
+    impares.push(num);
   }
   num++
 }
-console.log('Números ímpares entre 10 e 20:' + pares);
+console.log('Números ímpares entre 10 e 20:' + impares);
 
 /*
 Repita os mesmos exercícios feitos acima, mas agora usando o loop "for".
@@ -80,8 +80,18 @@ Só vamos mudar o range:
 - No primeiro "for", mostre os números pares entre 100 e 120, inclusive eles;
 - No segundo "for", mostre os números ímpares entre 111 e 125, inclusive eles.
 */
-console.log('Números pares entre 100 e 120:');
-// ?
+var pares = [];
+for (let x = 100; x <= 120; x++) {
+  if (x % 2 === 0) {
+    pares.push(x);
+  }
+}
+console.log('Números pares entre 100 e 120:' + pares);
 
-console.log('Números ímpares entre 111 e 125:');
-// ?
+var impares = [];
+for (let y = 111; y <= 125; y++) {
+  if (y % 2 === 1) {
+    impares.push(y);
+  }
+}
+console.log('Números ímpares entre 111 e 125:' + impares);
