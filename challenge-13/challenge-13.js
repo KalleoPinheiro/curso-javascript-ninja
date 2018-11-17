@@ -42,7 +42,7 @@ console.log(brasil.shift())
 Crie um novo array chamado `newSul`, que receba somente os estados do sul,
 pegando do array `brasil`. Não remova esses itens de `brasil`.
 */
-var newSul = brasil.splice(2, 3)
+var newSul = brasil.slice(2, 5)
 
 /*
 Mostre no console os estados que estão em `newSul`.
@@ -71,7 +71,7 @@ console.log(nordeste)
 Remova de `brasil` os estados do `sudeste`, colocando-os em uma variável
 chamada `newSudeste`.
 */
-var newSudeste = brasil.splice(2,4)
+var newSudeste = brasil.splice(5)
 
 /*
 Adicione os estados do `nordeste` ao array `brasil`. Esses estados devem
@@ -99,8 +99,8 @@ propriedades:
 - `estado`: que será o estado do array `brasil`.
 */
 newBrasil = [];
-brasil.forEach(function (item) {
-    newBrasil.push(item)
+brasil.forEach(function (item, index) {
+    newBrasil.push({id: index, estado: item})
 })
 
 /*
@@ -118,8 +118,9 @@ Senão, mostre no console:
 */
 console.log( '\nTodos os estados de `brasil` tem mais de 7 letras?' );
 estadosComMaisdeSete = brasil.every(function(item){
-    console.log(item.length > 7 ? 'Sim, todos os estados tem mais de 7 letras!' : 'Nem todos os estados tem mais de 7 letras!')
+    return item.length > 7
 });
+console.log(estadosComMaisdeSete ? 'Sim, todos os estados tem mais de 7 letras!' : 'Nem todos os estados tem mais de 7 letras!')
 
 /*
 Percorra o array `brasil` e verifique se o Ceará está incluído, atribuindo o
@@ -142,7 +143,7 @@ objeto desse array, e adicione a frase abaixo na propriedade `estado`:
 Atribua o novo array a uma variável chamada `map`.
 */
 var map = newBrasil.map(function(item, index){
-    return {id: index+1, estado: item + ' pertence ao Brasil'}
+    return {id: index+1, estado: item.estado + ' pertence ao Brasil'}
 })
 
 /*
