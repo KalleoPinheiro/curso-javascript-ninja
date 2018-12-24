@@ -23,19 +23,20 @@
   adicionados à idade original (age). Esse método deverá retornar o objeto
   que será instanciado.
   */
-  function CreatePerson(name, lastName, age) {
+  function Person(name, lastName, age) {
     this.name = name;
     this.lastName = lastName;
     this.age = age;
-    this.getFullName = function () {
+    this.getFullName = function getFullName() {
       const fullName = `${this.name} ${this.lastName}`;
       return fullName.toUpperCase();
     };
-    this.getAge = function () {
+    this.getAge = function getAge() {
       return this.age;
     };
-    this.addAge = function () {
-      return this.age += arguments[0];
+    this.addAge = function addAge() {
+      this.age += arguments[0];
+      return this;
     };
   };
 
@@ -46,10 +47,10 @@
   Mostre as 3 novas pessoas criadas no console (Um console.log por pessoa).
   */
   console.log('Novas pessoas criadas à partir de Person:');
-  const jeiciele = new CreatePerson('Jeiciele', 'da Silva', 25);
-  const cleide = new CreatePerson('cleide', 'Aparecida', 39);
-  const nathan = new CreatePerson('nathan', 'Pinheiro', 15);
-  const voMaria = new CreatePerson('vó Maria', 'Alves', 79);
+  const jeiciele = new Person('Jeiciele', 'da Silva', 25);
+  const cleide = new Person('cleide', 'Aparecida', 39);
+  const nathan = new Person('nathan', 'Pinheiro', 15);
+  const voMaria = new Person('vó Maria', 'Alves', 79);
 
   console.log(jeiciele);
   console.log(nathan);
@@ -81,13 +82,17 @@
   - "[NOME COMPLETO] agora tem [NOVA IDADE] anos."
   */
   console.log('\nNova idade das pessoas:');
-  jeiciele.addAge(2);
-  nathan.addAge(5);
-  cleide.addAge(1);
-  voMaria.addAge(2);
-  console.log(`${jeiciele.getFullName()} agora tem ${jeiciele.age} anos.`);
-  console.log(`${cleide.getFullName()} agora tem ${cleide.age} anos.`);
-  console.log(`${nathan.getFullName()} agora tem ${nathan.age} anos.`);
-  console.log(`${voMaria.getFullName()} agora tem ${voMaria.age} anos.`);
+  console.log(
+    `${jeiciele.getFullName()} agora tem ${jeiciele.addAge(2).getAge()} anos.`
+  );
+  console.log(
+    `${cleide.getFullName()} agora tem ${cleide.addAge(10).getAge()} anos.`
+  );
+  console.log(
+    `${nathan.getFullName()} agora tem ${nathan.addAge(5).getAge()} anos.`
+  );
+  console.log(
+    `${voMaria.getFullName()} agora tem ${voMaria.addAge(1).getAge()} anos.`
+  );
 
 })();
