@@ -7,7 +7,7 @@
   */
 
   /*
-  Declare uma variável chamada `name` que receba seu primeiro nome.
+  Declare uma variável chamgit sada `name` que receba seu primeiro nome.
   Mostre no console todas as letras do seu nome separadas, com a frase:
   - "[LETRA] é a [POSIÇÃO]ª letra do meu nome."
   Ex: no caso do nome ser "Fernando", deve mostrar as frases:
@@ -18,8 +18,8 @@
   console.log('As letras do seu nome:');
   const name = 'Kalleo';
 
-  for (let i = 0; i < name.length; i++) {
-    console.log(`${name.charAt(i)} é a ${i + 1}ª letra do meu nome`);
+  for (let i = 0, length = name.length; i < length; i++) {
+    console.log(`${name.charAt(i)} é a ${(i + 1)}ª letra do meu nome`);
   }
   /*
   - Declare uma variável chamada `fullName`, que receba seu nome completo,
@@ -37,16 +37,12 @@
   const fullName = 'windson-kalleo-pinheiro-rocha';
 
   function convertName(name) {
-    const convertedName = [];
-    name.split('-').forEach(element => {
-      convertedName.push(element.charAt(0).toUpperCase() + element.slice(
-        1));
-    });
-    console.log(name);
-    console.log(convertedName.join(' '));
+    return name.split('-').map(element => element.charAt(0).toUpperCase() +
+      element.slice(1)).join(' ');
   }
 
-  convertName(fullName);
+  console.log(fullName);
+  console.log(convertName(fullName));
 
   /*
   - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -58,21 +54,21 @@
   5 nomes foi somente uma sugestão ;)
   */
   console.log('\nMeus amigos:');
-  const names = ['João', 'Maria', 'Roberto', 'Pedro', 'Marcos'];
+  const friends = ['João', 'Maria', 'Roberto', 'Pedro', 'Marcos'];
+  let phrase = friends.reduce((acumulated, current, index) => {
+    return index === (friends.length - 1) ?
+      `${acumulated} e ${current}` :
+      `${acumulated}, ${current}`;
+  }).concat(' são meus amigos.');
 
-  const lastName = names.splice(names.length - 1);
-  const firstNames = names.slice(0, (names.length)).toString().split(',').join(
-    ', ');
-  let result = firstNames.concat(' e ', lastName);
-  console.log(`${result} são meus amigos.`);
+  console.log(phrase);
 
   /*
   Usando o replace(), faça a string "Roberto" virar "Roberta".
   Mostre o resultado no console.
   */
   console.log('\nEra "Roberto", agora é:');
-  result = result.replace('Roberto', 'Roberta');
-  console.log(`${result} são meus amigos.`);
+  console.log('Roberto'.replace('to', 'ta'));
 
   /*
   Mostre no console a parte "nando" da string "Fernando". Use o método que
@@ -90,7 +86,7 @@
   Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
   */
   console.log('\nNome com letras intercaladas entre caixa alta e baixa:');
-  const myName = 'Kalleo';
+  const myName = 'kalleo';
 
   function changeName(name) {
     let result = '';
