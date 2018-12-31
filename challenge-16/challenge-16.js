@@ -1,5 +1,5 @@
 (() => {
-  'use strct';
+  'use strict'
   /*
   1. Envolva todo o conteúdo desse desafio em uma IIFE.
   2. Adicione a diretiva 'use strict';
@@ -7,20 +7,20 @@
   */
 
   /*
- Declare uma variável chamada `name` que receba seu primeiro nome.
- Mostre no console todas as letras do seu nome separadas, com a frase:
- - "[LETRA] é a [POSIÇÃO]ª letra do meu nome."
- Ex: no caso do nome ser "Fernando", deve mostrar as frases:
-- "F é a 1ª letra do meu nome."
-- "e é a 2ª letra do meu nome."
-E assim por diante, até a última.
-*/
+  Declare uma variável chamada `name` que receba seu primeiro nome.
+  Mostre no console todas as letras do seu nome separadas, com a frase:
+  - "[LETRA] é a [POSIÇÃO]ª letra do meu nome."
+  Ex: no caso do nome ser "Fernando", deve mostrar as frases:
+  - "F é a 1ª letra do meu nome."
+  - "e é a 2ª letra do meu nome."
+  E assim por diante, até a última.
+  */
   console.log('As letras do seu nome:');
-  const name = 'Windson';
-  for (let i = 0; i < name.length; i++) {
-    console.log(`${name.charAt(i)} é a ${i + 1}º letra do meu nome`);
-  }
+  const name = 'Kalleo';
 
+  for (let i = 0; i < name.length; i++) {
+    console.log(`${name.charAt(i)} é a ${i + 1}ª letra do meu nome`);
+  }
   /*
   - Declare uma variável chamada `fullName`, que receba seu nome completo,
   escrito no formato de slug (caixa baixa e palavras separadas por um traço).
@@ -36,17 +36,17 @@ E assim por diante, até a última.
   console.log('\nNome convertido à partir de um slug:');
   const fullName = 'windson-kalleo-pinheiro-rocha';
 
-  function modifyName(name) {
-    const nameArray = name.split('-');
-    const newName = [];
-    for (let i = 0; i < nameArray.length; i++) {
-      newName.push(
-        `${nameArray[i].charAt(0).toUpperCase()}${nameArray[i].slice(1)}`);
-    }
-    return newName.join(' ');
+  function convertName(name) {
+    const convertedName = [];
+    name.split('-').forEach(element => {
+      convertedName.push(element.charAt(0).toUpperCase() + element.slice(
+        1));
+    });
+    console.log(name);
+    console.log(convertedName.join(' '));
   }
-  console.log(fullName);
-  console.log(modifyName(fullName));
+
+  convertName(fullName);
 
   /*
   - Crie um array com 5 nomes. Reduza esses nomes a uma única string, separando
@@ -58,22 +58,28 @@ E assim por diante, até a última.
   5 nomes foi somente uma sugestão ;)
   */
   console.log('\nMeus amigos:');
-  // ?
+  const names = ['João', 'Maria', 'Roberto', 'Pedro', 'Marcos'];
+
+  const lastName = names.splice(names.length - 1);
+  const firstNames = names.slice(0, (names.length)).toString().split(',').join(
+    ', ');
+  let result = firstNames.concat(' e ', lastName);
+  console.log(`${result} são meus amigos.`);
 
   /*
   Usando o replace(), faça a string "Roberto" virar "Roberta".
   Mostre o resultado no console.
   */
   console.log('\nEra "Roberto", agora é:');
-  // ?
+  result = result.replace('Roberto', 'Roberta');
+  console.log(`${result} são meus amigos.`);
 
   /*
   Mostre no console a parte "nando" da string "Fernando". Use o método que
   faz a busca do final para o início da string.
   */
   console.log('\nParte de uma string:');
-  // ?
-
+  console.log('Fernando'.substring(8, 3));
   /*
   Declare uma variável chamada `myName`, que receba o seu primeiro nome,
   escrito de forma natural.
@@ -84,6 +90,14 @@ E assim por diante, até a última.
   Ex.: Nomes que deveriam funcionar: "Fernando", "RoBertO", "gabriEla", etc.
   */
   console.log('\nNome com letras intercaladas entre caixa alta e baixa:');
-  // ?
+  const myName = 'Kalleo';
 
+  function changeName(name) {
+    let result = '';
+    for (let i = 0; i < name.length; i++) {
+      i % 2 === 0 ? result += name[i].toUpperCase() : result += name[i].toLowerCase()
+    }
+    return result;
+  }
+  console.log(changeName(myName));
 })();
