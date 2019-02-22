@@ -24,33 +24,24 @@
   const $btnReset = doc.querySelector('[data-js="reset"]');
 
   let interval;
-
   $inputTimer.value = 0;
 
-  $btnStart.addEventListener('click', start(event), false);
+  $btnStart.addEventListener('click', start, false);
+  $btnStop.addEventListener('click', stop, false);
+  $btnReset.addEventListener('click', reset, false);
 
-  function start(event) {
-    event.preventDefault();
+  function start() {
     interval = setInterval(() => {
       $inputTimer.value++;
     }, 1000);
   }
 
-  $btnStop.addEventListener(
-    'click',
-    function stop(event) {
-      event.preventDefault();
-      clearInterval(interval);
-    },
-    false
-  );
+  function stop() {
+    clearInterval(interval);
+  }
 
-  $btnReset.addEventListener(
-    'click',
-    function reset(event) {
-      event.preventDefault();
-      $inputTimer.value = 0;
-    },
-    false
-  );
+  function reset() {
+    $inputTimer.value = 0;
+    stop();
+  }
 })(document);
