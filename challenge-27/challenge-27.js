@@ -54,6 +54,22 @@
     return Array.prototype.filter.apply(this.element, arguments);
   };
 
+  DOM.prototype.reduce = function reduce() {
+    return Array.prototype.reduce.apply(this.element, arguments);
+  };
+
+  DOM.prototype.reduceRight = function reduceRight() {
+    return Array.prototype.reduceRight.apply(this.element, arguments);
+  };
+
+  DOM.prototype.every = function every() {
+    return Array.prototype.every.apply(this.element, arguments);
+  };
+
+  DOM.prototype.some = function some() {
+    return Array.prototype.some.apply(this.element, arguments);
+  };
+
   const $a = new DOM('[data-js="link"]');
 
   $a.forEach(item => console.log(item));
@@ -61,6 +77,5 @@
   $a.map(item => console.log(`Item -> ${item}`));
 
   console.log($a.filter(item => item.firstChild.nodeValue === 'Link 1'));
-
 
 })();
