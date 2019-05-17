@@ -29,14 +29,63 @@
   */
 
   const api = new XMLHttpRequest();
-  api.open('get', '/');
-  api.send();
+  const $ = doc.querySelector.bind(doc);
 
-  doc.addEventListener(
-    'readystatechange',
-    function() {
-      console.log('Requisição finalizada', api.readyState);
-    },
-    false
-  );
+  let logradouro = $('[data-js="logradouro"]');
+  let bairro = $('[data-js="bairro"]');
+  let estado = $('[data-js="estado"]');
+  let cidade = $('[data-js="cidade"]');
+  const cep = $('[data-js="cep"]');
+  const inputCep = $('[data-js="inputCep"]');
+  const form = $('[data-js="form"]');
+  const baseUrl = 'https://viacep.com.br/ws/[CEP]/json/';
+
+  form.addEventListener('submit', handlerSubmit, false);
+
+  function handlerSubmit(event) {
+    event.preventDefault();
+    try {
+      if (!getCep()) throw new Error('Cep inválido!');
+      const url = baseUrl.replace('[CEP]', getCep());
+      api.open('get', url);
+      api.send();
+      api.addEventListener('readystatechange', hasResponse, false);
+    } catch (error) {
+      console.error(error.message);
+      alert(error.message);
+    }
+  }
+
+  function hasResponse() {
+    if (handler()) {
+      fillDom(parseData(api.responseText) || '-');
+    };
+  }
+
+  function handler() {
+    return api.readyState === 4 && api.status === 200;
+  }
+
+  function getCep() {
+    const pattern = /^\d{8}$/g;
+    return pattern.test(inputCep.value) ? inputCep.value : null;
+  }
+
+  function parseData(response) {
+    let result;
+    try {
+      result = JSON.parse(response);
+    } catch (error) {
+      result = null;
+    }
+    return result;
+  }
+
+  function fillDom(data) {
+    logradouro.textContent = data.logradouro;
+    bairro.textContent = data.bairro;
+    estado.textContent = data.uf;
+    cidade.textContent = data.localidade;
+    cep.textContent = data.cep;
+  }
 })(document);

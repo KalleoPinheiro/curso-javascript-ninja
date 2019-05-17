@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Challenge-28</title>
-  </head>
-  <body>
-    <form action="submit">
-      <input type="text" placeholder="CEP" data-js="inputCep" />
-      <button type="submit" data-js="btnSubmit">Enviar</button>
-      <br />
-      <div data-js="messageContent"></div>
-      <div>
-        <input type="text" data-js="logadouro" />
-        <input type="text" data-js="bairro" />
-        <input type="text" data-js="estado" />
-        <input type="text" data-js="cidade" />
-        <input type="text" data-js="cep" />
-      </div>
-    </form>
 
-    <script src="./challenge-28.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Challenge-28</title>
+</head>
+
+<body>
+  <form data-js="form">
+    <input type="text" placeholder="CEP" data-js="inputCep" />
+    <button type="submit">Enviar</button>
+    <br />
+    <div data-js="messageContent"></div>
+    <div>
+      <p><strong>Logradouro: </strong> <span data-js="logradouro">-</span></p>
+      <p><strong>Bairro: </strong> <span data-js="bairro">-</span></p>
+      <p><strong>Estado: </strong> <span data-js="estado">-</span></p>
+      <p><strong>Cidade: </strong> <span data-js="cidade">-</span></p>
+      <p><strong>Cep: </strong> <span data-js="cep">-</span></p>
+    </div>
+  </form>
+
+  <script src="./challenge-28.js"></script>
+</body>
+
 </html>
