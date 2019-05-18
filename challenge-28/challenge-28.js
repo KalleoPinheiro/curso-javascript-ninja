@@ -38,7 +38,8 @@
   const cep = $('[data-js="cep"]');
   const inputCep = $('[data-js="inputCep"]');
   const form = $('[data-js="form"]');
-  const baseUrl = 'https://viacep.com.br/ws/[CEP]/json/';
+  const message = $('[data-js="messageContent"]');
+  const baseUrl = 'http://apps.widenet.com.br/busca-cep/api/cep/[CEP].json/';
 
   form.addEventListener('submit', handlerSubmit, false);
 
@@ -46,13 +47,14 @@
     event.preventDefault();
     try {
       if (!getCep()) throw new Error('Cep inválido!');
-      const url = baseUrl.replace('[CEP]', getCep());
+      const url = replaceCep(baseUrl);
       api.open('get', url);
       api.send();
+      showMessage('loading');
       api.addEventListener('readystatechange', hasResponse, false);
     } catch (error) {
+      showMessage('error');
       console.error(error.message);
-      alert(error.message);
     }
   }
 
@@ -74,18 +76,33 @@
   function parseData(response) {
     let result;
     try {
+      showMessage('success');
       result = JSON.parse(response);
     } catch (error) {
+      showMessage('error');
       result = null;
     }
     return result;
   }
 
   function fillDom(data) {
-    logradouro.textContent = data.logradouro;
-    bairro.textContent = data.bairro;
-    estado.textContent = data.uf;
-    cidade.textContent = data.localidade;
-    cep.textContent = data.cep;
+    logradouro.textContent = data.address;
+    bairro.textContent = data.district;
+    estado.textContent = data.state;
+    cidade.textContent = data.city;
+    cep.textContent = data.code;
+  }
+
+  function showMessage(type) {
+    const status = {
+      success: replaceCep('Endereço referente ao CEP [CEP]:'),
+      error: replaceCep('Não encontramos o endereço para o CEP [CEP].'),
+      loading: replaceCep('Buscando informações para o CEP [CEP]...')
+    };
+    message.textContent = status[type];
+  }
+
+  function replaceCep(string) {
+    return string.replace('[CEP]', getCep());
   }
 })(document);
