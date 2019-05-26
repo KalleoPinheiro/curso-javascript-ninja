@@ -1,4 +1,4 @@
-(doc => {
+(DOM => {
   'use strict';
   /*
   No HTML:
@@ -29,16 +29,15 @@
   */
 
   const api = new XMLHttpRequest();
-  const $ = doc.querySelector.bind(doc);
+  let logradouro = DOM('[data-js="logradouro"]');
+  let bairro = DOM('[data-js="bairro"]');
+  let estado = DOM('[data-js="estado"]');
+  let cidade = DOM('[data-js="cidade"]');
+  const cep = DOM('[data-js="cep"]');
+  const inputCep = DOM('[data-js="inputCep"]');
+  const form = DOM('[data-js="form"]');
+  const message = DOM('[data-js="messageContent"]');
 
-  let logradouro = $('[data-js="logradouro"]');
-  let bairro = $('[data-js="bairro"]');
-  let estado = $('[data-js="estado"]');
-  let cidade = $('[data-js="cidade"]');
-  const cep = $('[data-js="cep"]');
-  const inputCep = $('[data-js="inputCep"]');
-  const form = $('[data-js="form"]');
-  const message = $('[data-js="messageContent"]');
   const baseUrl = 'http://apps.widenet.com.br/busca-cep/api/cep/[CEP].json/';
 
   form.addEventListener('submit', handlerSubmit, false);
@@ -46,7 +45,10 @@
   function handlerSubmit(event) {
     event.preventDefault();
     try {
-      if (!getCep()) throw new Error('Cep inválido!');
+      if (!getCep()) {
+        fillDom(null);
+        throw new Error('Cep inválido!');
+      };
       const url = replaceCep(baseUrl);
       api.open('get', url);
       api.send();
@@ -54,13 +56,20 @@
       api.addEventListener('readystatechange', hasResponse, false);
     } catch (error) {
       showMessage('error');
+      fillDom(null);
       console.error(error.message);
     }
   }
 
   function hasResponse() {
     if (handler()) {
-      fillDom(parseData(api.responseText) || '-');
+      const data = parseData(api.responseText);
+      debugger
+      if (!data) {
+        fillDom(null);
+        throw new Error('Cep inválido!');
+      }
+      fillDom(data);
     };
   }
 
@@ -86,11 +95,11 @@
   }
 
   function fillDom(data) {
-    logradouro.textContent = data.address;
-    bairro.textContent = data.district;
-    estado.textContent = data.state;
-    cidade.textContent = data.city;
-    cep.textContent = data.code;
+    logradouro.textContent = data ? data.address : '-';
+    bairro.textContent = data ? data.district : '-';
+    estado.textContent = data ? data.state : '-';
+    cidade.textContent = data ? data.city : '-';
+    cep.textContent = data ? data.code : '-';
   }
 
   function showMessage(type) {
@@ -105,4 +114,4 @@
   function replaceCep(string) {
     return string.replace('[CEP]', getCep());
   }
-})(document);
+})(window.DOM);

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Challenge-29</title>
+  <style>
+    th {
+      border: solid 1px #000;
+      padding: 5px;
+      background-color: lightgray;
+    }
+
+    tr img {
+      max-width: 200px;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="display: flex;flex-direction:column;justify-content:center; align-items:center">
+    <header>
+      <h1 data-js="name" style="text-align: center;">Company name</h1>
+      <h4 data-js="phone" style="text-align: center;">Company number</h4>
+    </header>
+    <section>
+      <form data-js="form"
+        style="display: flex; flex-direction:column;width: 500px;justify-content:center;align-items:center;">
+        <input type="text" data-js="image" placeholder="Imagem" style="margin-top:10px">
+        <input type="text" data-js="brand" placeholder="Marca/Modelo" style="margin-top:10px">
+        <input type="text" data-js="year" placeholder="Ano" style="margin-top:10px">
+        <input type="text" data-js="plate" placeholder="Placa do carro" style="margin-top:10px">
+        <input type="text" data-js="color" placeholder="Cor" style="margin-top:10px">
+        <button type="submit"
+          style="margin: 20px;width:50%; height: 30px; background-color: cornflowerblue; color: white">Cadastrar</button>
+      </form>
+    </section>
+    <section>
+      <table style="width: 500px;">
+        <thead>
+          <tr>
+            <th colspan="5">Carros cadastrados</th>
+          </tr>
+          <tr>
+            <th>Imagem</th>
+            <th>Marca/Modelo</th>
+            <th>Ano</th>
+            <th>Placa</th>
+            <th>Cor</th>
+          </tr>
+        </thead>
+        <tbody data-js="data">
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="5">Total: <span data-js="total">0</span> </th>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+  </div>
+
+
+  <script src="./dom.js"></script>
+  <script src="./challenge-29.js"></script>
+</body>
+
+</html>

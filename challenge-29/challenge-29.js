@@ -1,4 +1,4 @@
-(function() {
+((DOM) => {
   'use strict';
 
   /*
@@ -36,4 +36,90 @@
   que será nomeado de "app".
   */
 
-})();
+  const app = (function () {
+    return {
+      init: function init() {
+        console.log('Iniciou');
+        this.getCompanyInfo();
+        this.initEvents();
+      },
+
+      getCompanyInfo: function getCompanyInfo() {
+        const api = new XMLHttpRequest();
+        api.open('GET', './company.json', true);
+        api.send();
+        api.addEventListener('readystatechange', this.getDataCompany, false);
+      },
+
+      getDataCompany: function getDataCompany() {
+        if (!app.isReady.call(this)) {
+          console.log('Erro!');
+          return;
+        }
+        const data = JSON.parse(this.responseText);
+        const companyName = DOM('[data-js="name"]');
+        const companyPhone = DOM('[data-js="phone"]');
+        companyName.textContent = data.name;
+        companyPhone.textContent = data.phone;
+      },
+
+      initEvents: function initEvents() {
+        const $form = DOM('[data-js="form"]');
+        $form.addEventListener('submit', app.submit, false);
+      },
+
+      isReady: function isReady() {
+        return this.readyState === 4 && this.status === 200;
+      },
+
+      handleSubmit: function handleSubmit() {
+        const form = DOM('[data-js="form"]');
+        form.addEventListener('submit', app.submit, false);
+      },
+
+      submit: function submit(event) {
+        event.preventDefault();
+        const $table = DOM('[data-js="data"]');
+        $table.appendChild(app.fillTable());
+      },
+
+      fillTable: function fillTable() {
+        const $fragment = document.createDocumentFragment();
+        const $tr = document.createElement('tr');
+
+        const $image = DOM('[data-js="image"]');
+        const img = document.createElement('img');
+        img.setAttribute('src', $image.value);
+        $tr.appendChild(img);
+
+        const $tdBrand = document.createElement('td');
+        const $brand = DOM('[data-js="brand"]');
+        $tdBrand.textContent = $brand.value;
+        $tr.appendChild($tdBrand);
+
+        const $tdYear = document.createElement('td');
+        const $year = DOM('[data-js="year"]');
+        $tdYear.textContent = $year.value;
+        $tr.appendChild($tdYear);
+
+        const $tdPlate = document.createElement('td');
+        const $plate = DOM('[data-js="plate"]');
+        $tdPlate.textContent = $plate.value;
+        $tr.appendChild($tdPlate);
+
+        const $tdColor = document.createElement('td');
+        const $color = DOM('[data-js="color"]');
+        $tdColor.textContent = $color.value;
+        $tr.appendChild($tdColor);
+
+        $fragment.appendChild($tr);
+
+        return $fragment;
+      },
+    }
+  })()
+
+  app.init();
+
+
+})(window.DOM);
